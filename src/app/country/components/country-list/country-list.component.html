@@ -11,6 +11,22 @@
     </tr>
   </thead>
   <tbody>
-    <tr></tr>
+    @for (country of countries(); track country.name) {
+      <tr>
+        <td></td>
+        <td>{{ country.icon }}</td>
+        <td>
+          <img
+            [src]="country.flag"
+            [alt]="country.name"
+            class="w-10 h-10 object-contain"
+          />
+        </td>
+        <td>{{ country.name }}</td>
+        <td>{{ country.capital }}</td>
+        <td>{{ country.population }}</td>
+        <td></td>
+      </tr>
+    }
   </tbody>
 </table>

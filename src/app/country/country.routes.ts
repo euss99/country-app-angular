@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import CountryLayout from '@app/country/layouts/CountryLayout/CountryLayout.component';
+import CountryLayout from '@/app/country/layouts/country-layout/country-layout.component';
 
 const ByCapitalPage = () =>
   import('@app/country/pages/by-capital-page/by-capital-page.component');

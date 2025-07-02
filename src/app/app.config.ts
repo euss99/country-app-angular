@@ -7,10 +7,13 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from '@app/app.routes';
 
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
+    provideHttpClient(withFetch()),
   ],
 };
