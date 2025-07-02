@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { Country } from '@app/country/interfaces/countries.interface';
 
 @Component({
   selector: 'country-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './country-list.component.html',
 })
 export class CountryList {
