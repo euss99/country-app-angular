@@ -8,6 +8,8 @@ const ByCountryPage = () =>
   import('@app/country/pages/by-country-page/by-country-page.component');
 const ByRegionPage = () =>
   import('@app/country/pages/by-region-page/by-region-page.component');
+const CountryPage = () =>
+  import('@app/country/pages/country-page/country-page.component');
 
 const CountryRoutes: Routes = [
   {
@@ -25,6 +27,10 @@ const CountryRoutes: Routes = [
       {
         path: 'by-region',
         loadComponent: ByRegionPage,
+      },
+      {
+        path: 'by/:code',
+        loadComponent: CountryPage,
       },
       {
         path: '**',
