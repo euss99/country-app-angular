@@ -1,4 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, resource, computed } from '@angular/core';
+
+import { firstValueFrom } from 'rxjs';
 
 import { Country } from '@app/country/interfaces/countries.interface';
 import { CountryList } from '@app/country/components/country-list/country-list.component';
@@ -12,27 +14,20 @@ import { CountryService } from '@app/country/services/country.service';
 })
 export default class ByCapitalPage {
   private countryService = inject(CountryService);
+  public query = signal<string>('');
 
-  public countries = signal<Country[]>([]);
-  public isLoading = signal<boolean>(false);
-  public hasError = signal<boolean>(false);
+  public countryResource = resource({
+    params: () => ({ query: this.query() }),
+    loader: async ({ params }) => {
+      if (!params.query) return [];
 
-  onSearchByCapital(term: string) {
-    if (this.isLoading()) return;
+      return firstValueFrom(
+        this.countryService.searchByCapital(params.query)
+      );
+    }
+  });
 
-    this.isLoading.set(true);
-    this.countryService.searchByCountry(term).subscribe({
-      next: (countries) => {
-        this.countries.set(countries);
-      },
-      error: (error) => {
-        this.isLoading.set(false);
-        this.hasError.set(true);
-      },
-      complete: () => {
-        this.isLoading.set(false);
-        this.hasError.set(false);
-      },
-    });
-  }
+  public countries = computed(() => this.countryResource.value() ?? []);
+  public error = computed(() => this.countryResource.error());
+  public isLoading = computed(() => this.countryResource.isLoading());
 }

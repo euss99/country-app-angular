@@ -9,7 +9,7 @@ import { CountryList } from '@app/country/components/country-list/country-list.c
   templateUrl: './by-country-page.component.html',
 })
 export default class ByCountryPage {
-  onSearchByCountry(term: string) {
+  onsearchByCapital(term: string) {
     console.log('Desde ByCountryPage', term);
   }
 }
