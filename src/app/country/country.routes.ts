@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import CountryLayout from './layouts/CountryLayout/CountryLayout.component';
+
+import CountryLayout from '@app/country/layouts/CountryLayout/CountryLayout.component';
 
 const ByCapitalPage = () =>
-  import('./pages/by-capital-page/by-capital-page.component');
+  import('@app/country/pages/by-capital-page/by-capital-page.component');
 const ByCountryPage = () =>
-  import('./pages/by-country-page/by-country-page.component');
+  import('@app/country/pages/by-country-page/by-country-page.component');
 const ByRegionPage = () =>
-  import('./pages/by-region-page/by-region-page.component');
+  import('@app/country/pages/by-region-page/by-region-page.component');
 
 const CountryRoutes: Routes = [
   {
