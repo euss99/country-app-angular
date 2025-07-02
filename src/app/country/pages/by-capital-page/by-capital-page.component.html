@@ -1,1 +1,8 @@
-<p>by-capital-page works!</p>
+<section class="flex flex-col gap-2">
+  <country-search
+    (onSearch)="onSearchByCapital($event)"
+    placeholderInput="Search by capital"
+  />
+
+  <country-list />
+</section>

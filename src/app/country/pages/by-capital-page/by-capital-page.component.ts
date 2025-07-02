@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
 
+import { CountryList } from '../../components/country-list/country-list.component';
+import { CountrySearch } from '../../components/country-search/country-search.component';
+
 @Component({
   selector: 'app-by-capital-page',
-  imports: [],
+  imports: [CountrySearch, CountryList],
   templateUrl: './by-capital-page.component.html',
 })
-export default class ByCapitalPage {}
+export default class ByCapitalPage {
+  onSearchByCapital(term: string) {
+    console.log('Desde ByCapitalPage', term);
+  }
+}
