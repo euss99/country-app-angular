@@ -1,1 +1,8 @@
-<p>by-country-page works!</p>
+<section class="flex flex-col gap-2">
+  <country-search
+    (onSearch)="onSearchByCountry($event)"
+    placeholderInput="Search by country"
+  />
+
+  <country-list />
+</section>
