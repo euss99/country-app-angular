@@ -4,7 +4,9 @@ import { Injectable, inject } from '@angular/core';
 import { map, Observable, catchError, throwError } from 'rxjs';
 
 import { Country } from '@app/country/interfaces/countries.interface';
+import { CountryDetail } from '@app/country/interfaces/country-detail.interface';
 import { CountryMapper } from '@app/country/mappers/country.mapper';
+import { CountryDetailMapper } from '@app/country/mappers/country-detail.mapper';
 import { environment } from '@environments/environment';
 import { RESTCountry } from '@app/country/interfaces/rest-countries.interface';
 
@@ -35,6 +37,20 @@ export class CountryService {
         throwError(() => new Error(`Don't found any country with that ${query}`)),
       ),
     );
+  }
+
+  public searchByCodeDetail(query: string): Observable<CountryDetail> {
+    const lowerQuery = query.toLowerCase();
+    const url = `${environment.COUNTRY_API_URL}/alpha/${lowerQuery}`;
+
+    return this.http
+      .get<RESTCountry[]>(url)
+      .pipe(
+        map((restCountries) => CountryDetailMapper.toCountryDetail(restCountries[0])),
+        catchError(() =>
+          throwError(() => new Error(`Don't found any country with that code ${query}`)),
+        ),
+      );
   }
 
   private searchBy = (

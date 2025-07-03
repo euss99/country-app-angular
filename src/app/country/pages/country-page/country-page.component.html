@@ -6,9 +6,8 @@
   <not-found
     title="Country Not Found"
     message="Don't found any country with that code"
-    backUrl="/country/by-capital"
-    backText="Back to Search"
+    backText="Back"
   />
-} @else {
-  <p>{{ country() | json }}</p>
+} @else if (country()) {
+  <country-information [country]="country()!" />
 }
