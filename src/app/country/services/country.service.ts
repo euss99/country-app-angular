@@ -18,11 +18,25 @@ export class CountryService {
     const lowerQuery = query.toLowerCase();
     const url = `${environment.COUNTRY_API_URL}/capital/${lowerQuery}`;
 
-    return this.http
-      .get<RESTCountry[]>(url)
-      .pipe(
-        map((restCountries) => CountryMapper.toCountries(restCountries)),
-        catchError(() => throwError(() => new Error("Don't found any country with that capital"))
-      ));
+    return this.http.get<RESTCountry[]>(url).pipe(
+      map((restCountries) => CountryMapper.toCountries(restCountries)),
+      catchError(() =>
+        throwError(
+          () => new Error("Don't found any country with that capital"),
+        ),
+      ),
+    );
+  }
+
+  public searchByCountry(query: string): Observable<Country[]> {
+    const lowerQuery = query.toLowerCase();
+    const url = `${environment.COUNTRY_API_URL}/name/${lowerQuery}`;
+
+    return this.http.get<RESTCountry[]>(url).pipe(
+      map((restCountries) => CountryMapper.toCountries(restCountries)),
+      catchError(() =>
+        throwError(() => new Error("Don't found any country with that name")),
+      ),
+    );
   }
 }

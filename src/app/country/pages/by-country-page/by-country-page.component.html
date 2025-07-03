@@ -1,8 +1,20 @@
 <section class="flex flex-col gap-2">
   <country-search
-    (onSearch)="onsearchByCapital($event)"
+    (onSearch)="query.set($event)"
     placeholderInput="Search by country"
   />
 
-  <!-- <country-list [countries]="countries()" /> -->
+  @if (error()) {
+    <div class="flex flex-col items-center justify-center h-full mt-4">
+      <h1 class="text-xl font-bold">{{ error() }}</h1>
+    </div>
+  } @else {
+    @if (countries().length > 0) {
+      <country-list [countries]="countries()" />
+    } @else {
+      <div class="flex flex-col items-center justify-center h-full mt-4">
+        <h1 class="text-xl font-bold">No countries found</h1>
+      </div>
+    }
+  }
 </section>

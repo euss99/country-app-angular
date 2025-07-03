@@ -2,7 +2,6 @@ import { Component, inject, signal, resource, computed } from '@angular/core';
 
 import { firstValueFrom } from 'rxjs';
 
-import { Country } from '@app/country/interfaces/countries.interface';
 import { CountryList } from '@app/country/components/country-list/country-list.component';
 import { CountrySearch } from '@app/country/components/country-search/country-search.component';
 import { CountryService } from '@app/country/services/country.service';
@@ -21,10 +20,10 @@ export default class ByCapitalPage {
     loader: async ({ params }) => {
       if (!params.query) return [];
 
-      return firstValueFrom(
-        this.countryService.searchByCapital(params.query)
+      return await firstValueFrom(
+        this.countryService.searchByCapital(params.query),
       );
-    }
+    },
   });
 
   public countries = computed(() => this.countryResource.value() ?? []);
