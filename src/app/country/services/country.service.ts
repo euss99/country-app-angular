@@ -26,9 +26,20 @@ export class CountryService {
     return this.searchBy(query, 'region');
   }
 
+  public searchByCode(query: string): Observable<Country> {
+    const countries = this.searchBy(query, 'alpha');
+
+    return countries.pipe(
+      map((countries) => countries[0]),
+      catchError(() =>
+        throwError(() => new Error(`Don't found any country with that ${query}`)),
+      ),
+    );
+  }
+
   private searchBy = (
     query: string,
-    type: 'capital' | 'name' | 'region'
+    type: 'capital' | 'name' | 'region' | 'alpha'
   ): Observable<Country[]> => {
     const lowerQuery = query.toLowerCase();
     const url = `${environment.COUNTRY_API_URL}/${type}/${lowerQuery}`;
@@ -37,7 +48,9 @@ export class CountryService {
       .get<RESTCountry[]>(url)
       .pipe(
         map((restCountries) => CountryMapper.toCountries(restCountries)),
-        catchError(() => throwError(() => new Error(`Don't found any country with that ${type}`))),
+        catchError(() =>
+          throwError(() => new Error(`Don't found any country with that ${type}`)),
+        ),
       );
   };
 }

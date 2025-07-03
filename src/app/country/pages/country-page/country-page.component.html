@@ -1,1 +1,14 @@
-<p>country-page works!</p>
+@if (isLoading()) {
+  <div class="flex justify-center items-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
+} @else if (error()) {
+  <not-found
+    title="Country Not Found"
+    message="Don't found any country with that code"
+    backUrl="/country/by-capital"
+    backText="Back to Search"
+  />
+} @else {
+  <p>{{ country() | json }}</p>
+}

@@ -9,6 +9,7 @@ export class CountryMapper {
       flag: country.flags.png,
       icon: country.flag,
       population: country.population,
+      code: country.cca2,
     };
   }
 
