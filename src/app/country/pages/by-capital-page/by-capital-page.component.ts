@@ -7,7 +7,6 @@ import { CountrySearch } from '@app/country/components/country-search/country-se
 import { CountryService } from '@app/country/services/country.service';
 
 @Component({
-  selector: 'app-by-capital-page',
   imports: [CountrySearch, CountryList],
   templateUrl: './by-capital-page.component.html',
 })
