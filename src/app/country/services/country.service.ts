@@ -15,28 +15,29 @@ export class CountryService {
   private http = inject(HttpClient);
 
   public searchByCapital(query: string): Observable<Country[]> {
-    const lowerQuery = query.toLowerCase();
-    const url = `${environment.COUNTRY_API_URL}/capital/${lowerQuery}`;
-
-    return this.http.get<RESTCountry[]>(url).pipe(
-      map((restCountries) => CountryMapper.toCountries(restCountries)),
-      catchError(() =>
-        throwError(
-          () => new Error("Don't found any country with that capital"),
-        ),
-      ),
-    );
+    return this.searchBy(query, 'capital');
   }
 
   public searchByCountry(query: string): Observable<Country[]> {
-    const lowerQuery = query.toLowerCase();
-    const url = `${environment.COUNTRY_API_URL}/name/${lowerQuery}`;
-
-    return this.http.get<RESTCountry[]>(url).pipe(
-      map((restCountries) => CountryMapper.toCountries(restCountries)),
-      catchError(() =>
-        throwError(() => new Error("Don't found any country with that name")),
-      ),
-    );
+    return this.searchBy(query, 'name');
   }
+
+  public searchByRegion(query: string): Observable<Country[]> {
+    return this.searchBy(query, 'region');
+  }
+
+  private searchBy = (
+    query: string,
+    type: 'capital' | 'name' | 'region'
+  ): Observable<Country[]> => {
+    const lowerQuery = query.toLowerCase();
+    const url = `${environment.COUNTRY_API_URL}/${type}/${lowerQuery}`;
+
+    return this.http
+      .get<RESTCountry[]>(url)
+      .pipe(
+        map((restCountries) => CountryMapper.toCountries(restCountries)),
+        catchError(() => throwError(() => new Error(`Don't found any country with that ${type}`))),
+      );
+  };
 }
