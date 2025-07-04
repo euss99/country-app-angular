@@ -1,17 +1,15 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, computed, inject } from '@angular/core';
-import { JsonPipe } from '@angular/common';
 import { toSignal, rxResource } from '@angular/core/rxjs-interop';
 
 import { map, of } from 'rxjs';
 
+import { CountryInformation } from '@app/country/components/country-information/country-information.component';
 import { CountryService } from '@app/country/services/country.service';
 import { NotFound } from '@app/shared/components/not-found/not-found.component';
-import { CountryInformation } from '@app/country/components/country-information/country-information.component';
-import { CountryDetail } from '@app/country/interfaces/country-detail.interface';
 
 @Component({
-  imports: [JsonPipe, NotFound, CountryInformation],
+  imports: [NotFound, CountryInformation],
   templateUrl: './country-page.component.html',
 })
 export default class CountryPage {

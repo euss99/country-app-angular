@@ -15,7 +15,7 @@ export default class ByRegionPage {
   private countryService = inject(CountryService);
   public query = signal<string>('');
 
-  public regionResource = rxResource({
+  public countryResource = rxResource({
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
       if (!params.query) return of([]);
@@ -24,7 +24,7 @@ export default class ByRegionPage {
     },
   });
 
-  public countries = computed(() => this.regionResource.value() ?? []);
-  public error = computed(() => this.regionResource.error());
-  public isLoading = computed(() => this.regionResource.isLoading());
+  public countries = computed(() => this.countryResource.value() ?? []);
+  public error = computed(() => this.countryResource.error());
+  public isLoading = computed(() => this.countryResource.isLoading());
 }
