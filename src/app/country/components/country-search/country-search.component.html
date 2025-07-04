@@ -8,7 +8,11 @@
     class="input input-bordered w-full"
   />
 
-  <button class="btn btn-primary" (click)="onSearchTerm(txtSearch.value)">
+  <button
+    (click)="onSearchTerm(txtSearch.value)"
+    [disabled]="isLoading()"
+    class="btn btn-primary"
+  >
     Search
   </button>
 </div>

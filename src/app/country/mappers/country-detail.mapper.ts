@@ -1,5 +1,9 @@
 import { RESTCountry } from '@app/country/interfaces/rest-countries.interface';
-import { CountryDetail, Currency, Language } from '@app/country/interfaces/country-detail.interface';
+import {
+  CountryDetail,
+  Currency,
+  Language,
+} from '@app/country/interfaces/country-detail.interface';
 
 export class CountryDetailMapper {
   static toCountryDetail(country: RESTCountry): CountryDetail {
@@ -81,11 +85,13 @@ export class CountryDetailMapper {
   private static mapCurrencies(currencies: any): Currency[] {
     if (!currencies) return [];
 
-    return Object.entries(currencies).map(([code, currency]: [string, any]) => ({
-      code,
-      name: currency.name,
-      symbol: currency.symbol,
-    }));
+    return Object.entries(currencies).map(
+      ([code, currency]: [string, any]) => ({
+        code,
+        name: currency.name,
+        symbol: currency.symbol,
+      }),
+    );
   }
 
   private static mapLanguages(languages: any): Language[] {

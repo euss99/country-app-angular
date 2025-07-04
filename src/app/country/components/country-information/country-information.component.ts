@@ -32,6 +32,8 @@ export class CountryInformation {
   }
 
   public getLanguagesText(): string {
-    return this.country().languages.map(l => l.name).join(', ');
+    return this.country()
+      .languages.map((l) => l.name)
+      .join(', ');
   }
 }

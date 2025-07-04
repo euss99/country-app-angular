@@ -17,8 +17,8 @@ export default class CountryPage {
   private activatedRoute = inject(ActivatedRoute);
 
   public countryCode = toSignal(
-    this.activatedRoute.params.pipe(map(params => params['code'])),
-    { initialValue: '' }
+    this.activatedRoute.params.pipe(map((params) => params['code'])),
+    { initialValue: '' },
   );
 
   public countryResource = rxResource({

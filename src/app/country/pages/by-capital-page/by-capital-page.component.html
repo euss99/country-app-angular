@@ -2,6 +2,7 @@
   <country-search
     (onSearch)="query.set($event)"
     placeholderInput="Search by capital"
+    [isLoading]="isLoading()"
   />
 
   @if (error()) {

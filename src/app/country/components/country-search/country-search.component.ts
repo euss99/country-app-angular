@@ -1,4 +1,12 @@
-import { Component, input, output, viewChild, ElementRef, signal, effect } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  viewChild,
+  ElementRef,
+  signal,
+  effect,
+} from '@angular/core';
 
 @Component({
   selector: 'country-search',
@@ -6,6 +14,7 @@ import { Component, input, output, viewChild, ElementRef, signal, effect } from 
 })
 export class CountrySearch {
   public placeholderInput = input.required<string>();
+  public isLoading = input<boolean>(false);
   public onSearch = output<string>();
 
   public inputValue = signal<string>('');
@@ -18,7 +27,7 @@ export class CountrySearch {
     }, 500);
 
     onCleanup(() => clearTimeout(debounce));
-  })
+  });
 
   public txtSearch = viewChild<ElementRef<HTMLInputElement>>('txtSearch');
 
