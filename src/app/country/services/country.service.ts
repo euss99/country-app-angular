@@ -28,17 +28,6 @@ export class CountryService {
     return this.searchBy(query, 'region');
   }
 
-  public searchByCode(query: string): Observable<Country> {
-    const countries = this.searchBy(query, 'alpha');
-
-    return countries.pipe(
-      map((countries) => countries[0]),
-      catchError(() =>
-        throwError(() => new Error(`Don't found any country with that ${query}`)),
-      ),
-    );
-  }
-
   public searchByCodeDetail(query: string): Observable<CountryDetail> {
     const lowerQuery = query.toLowerCase();
     const url = `${environment.COUNTRY_API_URL}/alpha/${lowerQuery}`;
